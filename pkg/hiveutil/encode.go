@@ -11,11 +11,14 @@ func stringToUtf16LE(buffer *bytes.Buffer, s string) error {
 	return binary.Write(buffer, binary.LittleEndian, utf16Encoded)
 }
 
-func StringToUtf16LE(s string) ([]byte, error) {
+func StringToUtf16LE(s string, includeNullTerminate bool) ([]byte, error) {
 	var buffer bytes.Buffer
 	err := stringToUtf16LE(&buffer, s)
 	if err != nil {
 		return nil, err
+	}
+	if includeNullTerminate {
+		buffer.WriteByte(0)
 	}
 	return buffer.Bytes(), nil
 }

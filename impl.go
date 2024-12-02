@@ -100,7 +100,7 @@ func (s *storeImpl) AddValue(key string, valueName string, dataType regtype.RegT
 	var valueData []byte
 	switch hiveType {
 	case hiveutil.RegSz, hiveutil.RegExpandSz:
-		valueData, err = hiveutil.StringToUtf16LE(data)
+		valueData, err = hiveutil.StringToUtf16LE(data, true)
 		if err != nil {
 			return err
 		}
